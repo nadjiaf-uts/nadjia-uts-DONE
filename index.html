@@ -3,280 +3,290 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>UTS Logika Matematika - Kalkulator Zakat</title>
+    <title>Kalkulator Zakat Berdalil | UTS Logika Matematika</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Gaya Dasar & Reset */
         body {
-            font-family: sans-serif;
-            margin: 20px;
-            background-color: #d184c0;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a2e; /* Latar belakang gelap unik */
+            color: #e9ecef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
+
         header, main {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            background-color: #fff;
+            max-width: 700px;
+            margin: 20px;
+            padding: 30px;
+            background-color: #2b2b4d; /* Background kontainer gelap */
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        h1 {
+            color: #71de8a; /* Hijau Mint */
+            font-size: 2.2em;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        
+        h2 {
+            color: #aa84e1; /* Ungu Muda */
+            border-bottom: 2px solid #3c3c6e;
+            padding-bottom: 10px;
+            margin-top: 30px;
+            font-size: 1.5em;
+        }
+
+        /* Info Box */
+        .info {
+            background-color: #3b3b6e;
+            border-left: 5px solid #71de8a;
+            padding: 15px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            font-size: 0.9em;
         }
-        header { margin-bottom: 20px; }
-        h1 { color: #493191; }
-        .info { 
-            line-height: 1.6; 
-            background-color: #f9f9f9;
-            border-left: 4px solid #622e87;
-            padding: 10px 15px;
-        }
-        .kalkulator div { margin-bottom: 15px; }
+        .info strong { color: #fff; }
+        .info ul { margin: 5px 0 0 20px; color: #ccc; }
+
+        /* Form Controls */
         label {
             display: block;
             margin-bottom: 5px;
-            font-weight: bold;
+            font-weight: 600;
+            color: #d8c2ff;
         }
-       
+        
+        input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #4d4d7d;
+            background-color: #3e3e6b;
+            color: #e9ecef;
+            border-radius: 6px;
+            transition: border-color 0.3s;
+        }
+        input[type="number"]:focus, select:focus {
+            border-color: #71de8a;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(113, 222, 138, 0.3);
+        }
+        input:disabled {
+            background-color: #333359;
+            cursor: not-allowed;
+            color: #999;
+        }
+
+        /* Checkbox Utama (Zakat Type) */
         label.checkbox-utama {
             display: flex;
             align-items: center;
-            font-weight: bold;
+            font-weight: 700;
             font-size: 1.1em;
-            padding: 10px;
-            background-color: #9a2376;
-            border-radius: 4px;
-            color: #fff;
+            padding: 12px 15px;
+            background-color: #aa84e1;
+            border-radius: 6px;
+            color: #1a1a2e;
+            cursor: pointer;
+            margin-bottom: 10px !important;
+            transition: background-color 0.3s;
+        }
+        label.checkbox-utama:hover {
+            background-color: #bfa1f8;
         }
         label.checkbox-utama input[type="checkbox"] {
-            margin-right: 10px;
-            width: 18px;
-            height: 18px;
+            margin-right: 12px;
+            width: 20px;
+            height: 20px;
+            accent-color: #90287f; /* Warna centang */
         }
-
-        input[type="number"], select {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-            border: 1px solid #aaabf8;
-            border-radius: 4px;
-        }
-        input:disabled {
-            background-color: #eee;
-            cursor: not-allowed;
-        }
-        
-       
-        #kalkulatorZakatMal button {
-            width: 100%;
-            background-color: #71de8a; 
-            color: white;
-            padding: 12px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        #kalkulatorZakatMal button:hover { background-color: #5ec078; }
-        
-      
-        #kalkulatorZakatFitrah button {
-            width: 100%;
-            background-color: #205072; 
-            color: white;
-            padding: 12px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        #kalkulatorZakatFitrah button:hover { background-color: #163a4a; }
-
-        
-        #totalZakatRupiah {
-            margin-top: 20px;
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #28a745; /* Hijau */
-            text-align: center;
-            padding: 15px;
-            background-color: #f4fef4;
-            border: 1px solid #c3e6cb;
-            border-radius: 4px;
-        }
-        
-
-
-        #totalZakatFitrah {
-            margin-top: 20px;
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #007bff; /* Biru */
-            text-align: center;
-            padding: 15px;
-            background-color: #f4f8ff;
-            border: 1px solid #b8d4ff;
-            border-radius: 4px;
-        }
-        
-    
-        #rincianZakat {
-            margin-top: 15px;
-            padding: 0;
-            line-height: 1.6;
-        }
-        #rincianZakat ul { list-style-type: none; padding: 0; margin: 0; }
-        #rincianZakat li {
-            padding: 10px;
-            background-color: #e7f3fe;
-            border-bottom: 1px solid #d1e7fd;
-        }
-         #rincianZakat li:first-child { border-top-left-radius: 4px; border-top-right-radius: 4px; }
-        #rincianZakat li:last-child { border-bottom: none; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; }
-        #rincianZakat li.tidak-wajib {
-            background-color: #f8f9fa;
-            color: #344657;
-            border-bottom-color: #eee;
-            font-style: italic;
-        }
-        
-           .hukum-logika {
-            margin-top: 30px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-            font-size: 0.9em;
-            line-height: 1.5;
-            color: #4c4242;
-        }
-        .hukum-logika strong {
-            color: #433838;
-        }
-        .info-box {
-            font-size: 0.85em;
-            background-color: #fffbe6;
-            border: 1px solid #ffe58f;
-            border-radius: 4px;
-            padding: 10px;
-            color: #664d03;
-        }
-        
-   
         .form-zakat-grup {
             padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-top: -10px;
-            margin-bottom: 20px;
+            border: 1px dashed #4d4d7d;
+            border-radius: 6px;
+            margin-top: 5px;
+            margin-bottom: 25px;
+            background-color: #333359;
         }
-        
-      
+
+        /* Radio Group (Zakat Selection) */
         .radio-grup-utama {
             display: flex;
-            gap: 10px;
-            background-color: #f0f0f0;
-            padding: 10px;
-            border-radius: 8px;
+            gap: 15px;
+            margin-bottom: 20px;
         }
         .radio-grup-utama label {
             flex: 1;
             text-align: center;
-            padding: 10px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 12px;
+            background-color: #3e3e6b;
+            border: 2px solid #4d4d7d;
+            border-radius: 6px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 600;
+            color: #d8c2ff;
+            transition: background-color 0.3s, border-color 0.3s;
         }
         .radio-grup-utama input[type="radio"] {
-            display: none; 
+            display: none;
         }
         .radio-grup-utama input[type="radio"]:checked + label {
-            background-color: #90287f;
-            color: white;
-            border-color: #822e7b;
+            background-color: #71de8a;
+            color: #1a1a2e;
+            border-color: #5ec078;
         }
-        
-   
-        .distribusi-container {
+
+        /* Buttons */
+        #kalkulatorZakatMal button {
+            background-color: #71de8a;
+            color: #1a1a2e;
+        }
+        #kalkulatorZakatFitrah button {
+            background-color: #aa84e1;
+            color: #1a1a2e;
+        }
+        #kalkulatorZakatMal button, #kalkulatorZakatFitrah button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-top: 15px;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        #kalkulatorZakatMal button:hover { background-color: #5ec078; transform: translateY(-1px); }
+        #kalkulatorZakatFitrah button:hover { background-color: #bfa1f8; transform: translateY(-1px); }
+
+        /* Hasil Zakat */
+        #totalZakatRupiah, #totalZakatFitrah {
             margin-top: 25px;
+            font-size: 1.6em;
+            font-weight: 700;
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        #totalZakatRupiah {
+            color: #71de8a;
+            background-color: #333359;
+            border: 2px solid #5ec078;
+        }
+        #totalZakatFitrah {
+            color: #aa84e1;
+            background-color: #333359;
+            border: 2px solid #a178e7;
+        }
+
+        /* Rincian */
+        #rincianZakat { margin-top: 15px; }
+        #rincianZakat ul { list-style-type: none; padding: 0; margin: 0; }
+        #rincianZakat li {
+            padding: 10px 15px;
+            background-color: #3e3e6b;
+            border-bottom: 1px solid #4d4d7d;
+            color: #e9ecef;
+        }
+        #rincianZakat li:first-child { border-top-left-radius: 4px; border-top-right-radius: 4px; }
+        #rincianZakat li:last-child { border-bottom: none; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; }
+        #rincianZakat li.tidak-wajib {
+            background-color: #2b2b4d;
+            color: #999;
+            font-style: italic;
+        }
+
+        /* Distribusi Mustahik */
+        .distribusi-container {
+            margin-top: 30px;
             padding-top: 20px;
-            border-top: 2px solid #b04998;
+            border-top: 2px dashed #4d4d7d;
         }
         .mustahik-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
             list-style-type: none;
             padding: 0;
             margin: 0;
-            display: grid;
-            grid-template-columns: 1fr 1fr; 
-            gap: 10px;
         }
-      
         .mustahik-list li {
-            display: flex;
-            flex-direction: column;
-            background-color: #f9f9f9;
+            background-color: #3e3e6b;
             padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #eee;
+            border-radius: 6px;
+            border: 1px solid #4d4d7d;
+            transition: background-color 0.2s;
         }
-
+        .mustahik-list li:hover {
+            background-color: #4d4d7d;
+        }
+        .mustahik-list input[type="checkbox"] {
+            accent-color: #71de8a;
+        }
         .mustahik-list div {
             display: flex;
             align-items: center;
         }
-        .mustahik-list input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            margin-right: 10px;
-            flex-shrink: 0; 
-        }
         .mustahik-list label {
-            font-weight: normal;
+            font-weight: 400;
+            color: #e9ecef;
+            cursor: pointer;
             margin-bottom: 0;
+            font-size: 0.95em;
         }
-        
-             .dalil-text {
+        .dalil-text {
             display: block;
-            font-size: 0.8em;
+            font-size: 0.75em;
             font-style: italic;
-            color: #793970;
-            background-color: #fff;
+            color: #ccc;
+            background-color: #2b2b4d;
             border-radius: 4px;
-            padding: 8px;
-            margin-top: 8px;
-            border-left: 3px solid #8d397b;
+            padding: 6px;
+            margin-top: 5px;
+            border-left: 3px solid #aa84e1;
         }
-        
-        #hasilDistribusi {
-            margin-top: 20px;
-        }
+
+        /* Hasil Distribusi */
         #hasilDistribusiIntro {
-            font-weight: bold;
+            font-weight: 600;
             margin-bottom: 10px;
             font-size: 1.1em;
+            color: #71de8a;
         }
         .hasil-distribusi-list {
             list-style-type: decimal;
-            padding-left: 20px;
+            padding-left: 30px;
             margin: 0;
-            background-color: #f4f8ff;
-            border: 1px solid #b8d4ff;
-            border-radius: 4px;
-            padding: 15px 15px 15px 30px;
+            background-color: #3e3e6b;
+            border: 1px solid #71de8a;
+            border-radius: 6px;
+            padding: 15px 15px 15px 40px;
+            color: #e9ecef;
         }
         .hasil-distribusi-list li {
             margin-bottom: 8px;
         }
-        .hasil-distribusi-list li:last-child {
-            margin-bottom: 0;
-        }
-        
-
-
         .distribusi-error {
-            color: #9a4594; 
-            background-color: #fdf7f7;
-            border: 1px solid #f5c6cb;
+            color: #ffcccc;
+            background-color: #663333;
+            border: 1px solid #ff0000;
             padding: 10px;
             border-radius: 4px;
-            font-weight: bold;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+        
+        .info-box {
+             background-color: #3e3e6b;
+             border: 1px solid #aa84e1;
+             color: #e9ecef;
         }
 
     </style>
@@ -284,8 +294,9 @@
 <body>
 
     <header>
-        <h1>UTS Logika Matematika</h1>
+        <h1><i class="fas fa-calculator"></i> Kalkulator Zakat Berdalil</h1>
         <div class="info">
+            <span style="color: #71de8a; font-weight: bold;">[UTS Logika Matematika]</span><br>
             <strong>NIM:</strong> 256612003<br>
             <strong>Nama:</strong> Nadjia febrianti<br>
             <strong>Kelas:</strong> Teknik Informatika - Non Reguler<br>
@@ -295,47 +306,45 @@
     </header>
 
     <main>
-    
-        <h2>Level 10:zakat berdalil</h2>
+        
+        <h2>Pilihan Zakat 🕌</h2>
         
         <div class="kalkulator">
-        
+            
             <div class="info-box">
                 <strong>Asumsi Kurs & Nisab:</strong>
-                <ul style="margin: 5px 0 0 20px; padding: 0;">
+                <ul style="margin: 5px 0 0 20px; padding: 0; font-size: 0.9em;">
                     <li>Harga Beras: <strong>Rp 13.000 /kg</strong> (Asumsi Fitrah)</li>
                     <li>Harga Emas: <strong>Rp 2.321.000 /gram</strong></li>
-                    <li>Harga Perak: <strong>Rp 20.000 /gram</strong> (Asumsi)</li>
-                    <li>Harga Gabah: <strong>Rp 6.000 /kg</strong> (Asumsi)</li>
-                    <li>Nisab Harta Maal (Uang, Niaga, dll): <strong>Rp 197.285.000</strong></li>
-                    <li>Nisab Penghasilan: <strong>Rp 16.440.417 /bulan</strong></li>
+                    <li>Nisab Harta Maal (Emas 85g): <strong>Rp 197.285.000</strong></li>
+                    <li>Nisab Penghasilan Bulanan: <strong>Rp 16.440.417 /bulan</strong></li>
                 </ul>
             </div>
             
-            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+            <hr style="border: 0; border-top: 1px solid #4d4d7d; margin: 25px 0;">
 
 
             <div class="radio-grup-utama">
                 <div>
                     <input type="radio" name="jenisZakatUtama" id="radioZakatMal" value="mal" onclick="gantiTampilanZakat()" checked>
-                    <label for="radioZakatMal">Hitung Zakat Mal</label>
+                    <label for="radioZakatMal">Zakat Maal (Harta)</label>
                 </div>
                 <div>
                     <input type="radio" name="jenisZakatUtama" id="radioZakatFitrah" value="fitrah" onclick="gantiTampilanZakat()">
-                    <label for="radioZakatFitrah">Hitung Zakat Fitrah</label>
+                    <label for="radioZakatFitrah">Zakat Fitrah</label>
                 </div>
             </div>
             
-            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+            <hr style="border: 0; border-top: 1px solid #4d4d7d; margin: 20px 0;">
 
 
-         
+          
             <div id="kalkulatorZakatMal">
  
                 <div>
                     <label class="checkbox-utama">
                         <input type="checkbox" id="checkEmas" onclick="toggleForm('Emas')">
-                        Zakat Emas
+                        💰 Zakat Emas
                     </label>
                 </div>
                 <div id="formEmas" class="form-zakat-grup" style="display: none;">
@@ -343,11 +352,11 @@
                     <div><label for="lamaHaulEmas">Lama Kepemilikan (haul, dalam tahun):</label><input type="number" id="lamaHaulEmas" placeholder="Contoh: 1"></div>
                 </div>
 
-              
+                
                 <div>
                     <label class="checkbox-utama">
                         <input type="checkbox" id="checkPerak" onclick="toggleForm('Perak')">
-                        Zakat Perak
+                        🥈 Zakat Perak
                     </label>
                 </div>
                 <div id="formPerak" class="form-zakat-grup" style="display: none;">
@@ -355,11 +364,11 @@
                     <div><label for="lamaHaulPerak">Lama Kepemilikan (haul, dalam tahun):</label><input type="number" id="lamaHaulPerak" placeholder="Contoh: 1"></div>
                 </div>
 
-              
+                
                 <div>
                     <label class="checkbox-utama">
                         <input type="checkbox" id="checkTabungan" onclick="toggleForm('Tabungan')">
-                        Zakat Tabungan, Uang, Investasi, dll
+                        💵 Zakat Tabungan, Uang, Investasi, dll
                     </label>
                 </div>
                 <div id="formTabungan" class="form-zakat-grup" style="display: none;">
@@ -371,7 +380,7 @@
                 <div>
                     <label class="checkbox-utama">
                         <input type="checkbox" id="checkPerniagaan" onclick="toggleForm('Perniagaan')">
-                        Zakat Perniagaan
+                        🛍️ Zakat Perniagaan
                     </label>
                 </div>
                 <div id="formPerniagaan" class="form-zakat-grup" style="display: none;">
@@ -379,11 +388,11 @@
                     <div><label for="lamaHaulPerniagaan">Lama Kepemilikan (haul, dalam tahun):</label><input type="number" id="lamaHaulPerniagaan" placeholder="Contoh: 1"></div>
                 </div>
 
-               
+                
                 <div>
                     <label class="checkbox-utama">
                         <input type="checkbox" id="checkPertanian" onclick="toggleForm('Pertanian')">
-                        Zakat Pertanian
+                        🌾 Zakat Pertanian
                     </label>
                 </div>
                 <div id="formPertanian" class="form-zakat-grup" style="display: none;">
@@ -397,11 +406,11 @@
                     </div>
                 </div>
 
-             
+              
                 <div>
                     <label class="checkbox-utama">
                         <input type="checkbox" id="checkPenghasilan" onclick="toggleForm('Penghasilan')">
-                        Zakat Penghasilan
+                        👨‍💼 Zakat Penghasilan
                     </label>
                 </div>
                 <div id="formPenghasilan" class="form-zakat-grup" style="display: none;">
@@ -413,7 +422,7 @@
                 <div>
                     <label class="checkbox-utama">
                         <input type="checkbox" id="checkPeternakan" onclick="toggleForm('Peternakan')">
-                        Zakat Peternakan / Perikanan
+                        🐑 Zakat Peternakan / Perikanan
                     </label>
                 </div>
                 <div id="formPeternakan" class="form-zakat-grup" style="display: none;">
@@ -421,11 +430,11 @@
                     <div><label for="lamaHaulPeternakan">Lama Kepemilikan (haul, dalam tahun):</label><input type="number" id="lamaHaulPeternakan" placeholder="Contoh: 1"></div>
                 </div>
 
-               
+                
                 <div>
                     <label class="checkbox-utama">
                         <input type="checkbox" id="checkPertambangan" onclick="toggleForm('Pertambangan')">
-                        Zakat Pertambangan
+                        💎 Zakat Pertambangan
                     </label>
                 </div>
                 <div id="formPertambangan" class="form-zakat-grup" style="display: none;">
@@ -436,14 +445,14 @@
                 <div>
                     <label class="checkbox-utama">
                         <input type="checkbox" id="checkRikaz" onclick="toggleForm('Rikaz')">
-                        Zakat Rikaz (Harta Temuan)
+                        🏺 Zakat Rikaz (Harta Temuan)
                     </label>
                 </div>
                 <div id="formRikaz" class="form-zakat-grup" style="display: none;">
                     <div><label for="nilaiRikaz">Nilai Harta Temuan (Rp):</label><input type="number" id="nilaiRikaz" placeholder="Contoh: 50000000"></div>
                 </div>
                 
-             
+              
                 <button onclick="hitungTotalZakat()">Hitung Total Zakat Mal</button>
                 <h3 id="totalZakatRupiah">Total Zakat Anda: Rp 0</h3>
                 <div id="rincianZakat">
@@ -452,23 +461,25 @@
                     </ul>
                 </div>
             </div>
-         
-
-
           
+
+
+            
             <div id="kalkulatorZakatFitrah" style="display: none;">
-                <div>
-                    <label for="jumlahJiwa">Jumlah Jiwa (orang):</label>
-                    <input type="number" id="jumlahJiwa" placeholder="Contoh: 2" value="1">
-                </div>
-                <div>
-                    <label for="jenisFitrah">Jenis Pembayaran:</label>
-                    <select id="jenisFitrah">
-                        <option value="beras_2_5">Beras 2.5 kg</option>
-                        <option value="beras_3_0">Beras 3.0 kg</option>
-                        <option value="uang_2_5">Uang (setara 2.5 kg beras)</option>
-                        <option value="uang_3_0">Uang (setara 3.0 kg beras)</option>
-                    </select>
+                <div class="form-zakat-grup">
+                    <div>
+                        <label for="jumlahJiwa">Jumlah Jiwa (orang):</label>
+                        <input type="number" id="jumlahJiwa" placeholder="Contoh: 2" value="1" min="1">
+                    </div>
+                    <div>
+                        <label for="jenisFitrah">Jenis Pembayaran:</label>
+                        <select id="jenisFitrah">
+                            <option value="beras_2_5">Beras 2.5 kg</option>
+                            <option value="beras_3_0">Beras 3.0 kg</option>
+                            <option value="uang_2_5">Uang (setara 2.5 kg beras)</option>
+                            <option value="uang_3_0">Uang (setara 3.0 kg beras)</option>
+                        </select>
+                    </div>
                 </div>
                 
                 <button onclick="hitungZakatFitrah()">Hitung Zakat Fitrah</button>
@@ -478,12 +489,12 @@
           
 
 
-           
+            
             <div id="distribusiContainer" class="distribusi-container" style="display: none;">
-                <h3>Distribusi Zakat (QS. At-Taubah [9]: 60)</h3>
-                <p>Pilih golongan mustahik (penerima) untuk didistribusikan:</p>
+                <h2>Distribusi Mustahik (QS. At-Taubah [9]: 60)</h2>
+                <p style="color: #ccc;">Pilih golongan mustahik (penerima) yang akan mendapatkan zakat:</p>
                 <ul class="mustahik-list">
-                   
+                    
                     <li>
                         <div>
                             <input type="checkbox" class="mustahik-check" id="checkFakir" value="Fakir" onclick="updateTampilanMustahik()">
@@ -491,7 +502,7 @@
                         </div>
                         <small id="dalilFakir" class="dalil-text" style="display: none;"></small>
                     </li>
-                   
+                    
                     <li>
                         <div>
                             <input type="checkbox" class="mustahik-check" id="checkMiskin" value="Miskin" onclick="updateTampilanMustahik()">
@@ -499,7 +510,7 @@
                         </div>
                         <small id="dalilMiskin" class="dalil-text" style="display: none;"></small>
                     </li>
-                   
+                    
                     <li>
                         <div>
                             <input type="checkbox" class="mustahik-check" id="checkAmil" value="Amil" onclick="updateTampilanMustahik()">
@@ -507,7 +518,7 @@
                         </div>
                         <small id="dalilAmil" class="dalil-text" style="display: none;"></small>
                     </li>
-                   
+                    
                     <li>
                         <div>
                             <input type="checkbox" class="mustahik-check" id="checkMuallaf" value="Muallaf" onclick="updateTampilanMustahik()">
@@ -523,7 +534,7 @@
                         </div>
                         <small id="dalilRiqab" class="dalil-text" style="display: none;"></small>
                     </li>
-                 
+                  
                     <li>
                         <div>
                             <input type="checkbox" class="mustahik-check" id="checkGharim" value="Gharim" onclick="updateTampilanMustahik()">
@@ -539,7 +550,7 @@
                         </div>
                         <small id="dalilFisabilillah" class="dalil-text" style="display: none;"></small>
                     </li>
-                 
+                  
                     <li>
                         <div>
                             <input type="checkbox" class="mustahik-check" id="checkIbnuSabil" value="Ibnu Sabil" onclick="updateTampilanMustahik()">
@@ -549,30 +560,23 @@
                     </li>
                 </ul>
                 
-   
+    
                 <p id="distribusiError" class="distribusi-error" style="display: none;"></p>
                 
                 <div id="hasilDistribusi">
                     <p id="hasilDistribusiIntro">Silakan hitung total zakat Anda terlebih dahulu.</p>
                     <ul id="hasilDistribusiList" class="hasil-distribusi-list" style="display: none;">
-                     
+                      
                     </ul>
                 </div>
             </div>
-         
-
-        </div>
-
-      
-        <div class="hukum-logika-container" style="display: none;">
-           
         </div>
     </main>
 
     <script>
-        // Konsistenkan HARGA_BERAS_KG dengan info-box (Rp 13.000/kg)
+        // --- Konstanta dan Nilai Awal ---
         const HARGA_BERAS_KG = 13000;
-        const HARGA_EMAS_GRAM = 2321000; 
+        const HARGA_EMAS_GRAM = 2321000;  
         const HARGA_PERAK_GRAM = 20000;
         const HARGA_GABAH_KG = 6000;
         
@@ -591,9 +595,9 @@
             Miskin: "Orang yang memiliki harta/pekerjaan, namun tidak cukup untuk memenuhi kebutuhan dasarnya.",
             Amil: "Orang yang bertugas mengumpulkan dan membagikan zakat (QS. At-Taubah [9]: 60).",
             Muallaf: "Orang yang baru masuk Islam atau yang hatinya perlu dilunakkan untuk Islam.",
-            Riqab: "Budak atau hamba sahaya yang ingin memerdekakan dirinya.",
+            Riqab: "Budak atau hamba sahaya yang ingin memerdekakan dirinya (saat ini jarang/tidak relevan di Indonesia).",
             Gharim: "Orang yang terlilit utang (untuk kebutuhan pokok atau mendamaikan).",
-            Fisabilillah: "Orang yang berjuang di jalan Allah (misal: dakwah, jihad, dll).",
+            Fisabilillah: "Orang yang berjuang di jalan Allah (misal: dakwah, pendidikan, dll).",
             IbnuSabil: "Musafir yang kehabisan bekal dalam perjalanan yang diridhai Allah."
         };
 
@@ -602,6 +606,8 @@
             currency: 'IDR',
             minimumFractionDigits: 0
         });
+
+        // --- Fungsi Utama UI dan Tampilan ---
 
         function gantiTampilanZakat() {
             let pilihan = document.querySelector('input[name="jenisZakatUtama"]:checked').value;
@@ -613,61 +619,33 @@
             if (pilihan === 'mal') {
                 kalkulatorMal.style.display = 'block';
                 kalkulatorFitrah.style.display = 'none';
-            } else {
+                
+                // Tampilkan hasil mal sebelumnya jika ada
+                if (globalTotalZakatRp > 0) {
+                    distribusiContainer.style.display = 'block';
+                } else {
+                    distribusiContainer.style.display = 'none';
+                }
+                document.getElementById('totalZakatFitrah').style.display = 'none';
+                document.getElementById('totalZakatRupiah').style.display = 'block';
+                document.getElementById('rincianZakat').style.display = 'block';
+            } else { // Fitrah
                 kalkulatorMal.style.display = 'none';
                 kalkulatorFitrah.style.display = 'block';
-            }
-            
-            document.getElementById('totalZakatRupiah').style.display = (pilihan === 'mal') ? 'block' : 'none';
-            document.getElementById('rincianZakat').style.display = (pilihan === 'mal') ? 'block' : 'none';
-            document.getElementById('totalZakatFitrah').style.display = 'none';
-            
-            distribusiContainer.style.display = 'none'; 
-            globalTotalZakatRp = 0;
-            globalTotalBerasKg = 0;
-        }
 
-        function hitungZakatFitrah() {
-            let jiwa = parseFloat(document.getElementById('jumlahJiwa').value) || 0;
-            let jenis = document.getElementById('jenisFitrah').value;
-            let hasilElemen = document.getElementById('totalZakatFitrah');
-            
-            globalTotalBerasKg = 0;
-            globalTotalZakatRp = 0;
-            let teksHasil = "";
-
-            if (jiwa <= 0) {
-                hasilElemen.innerHTML = 'Jumlah jiwa harus diisi (minimal 1).';
-                hasilElemen.style.display = 'block';
-                document.getElementById('distribusiContainer').style.display = 'none';
-                return;
+                // Tampilkan hasil fitrah sebelumnya jika ada
+                if (globalTotalBerasKg > 0 || globalTotalZakatRp > 0) {
+                     document.getElementById('totalZakatFitrah').style.display = 'block';
+                     distribusiContainer.style.display = 'block';
+                } else {
+                     document.getElementById('totalZakatFitrah').style.display = 'none';
+                     distribusiContainer.style.display = 'none';
+                }
+                document.getElementById('totalZakatRupiah').style.display = 'none';
+                document.getElementById('rincianZakat').style.display = 'none';
             }
             
-            switch (jenis) {
-                case 'beras_2_5':
-                    globalTotalBerasKg = jiwa * 2.5;
-                    teksHasil = `Total Zakat: <strong>${globalTotalBerasKg.toFixed(1)} kg Beras</strong> (untuk ${jiwa} jiwa)`;
-                    break;
-                case 'beras_3_0':
-                    globalTotalBerasKg = jiwa * 3.0;
-                    teksHasil = `Total Zakat: <strong>${globalTotalBerasKg.toFixed(1)} kg Beras</strong> (untuk ${jiwa} jiwa)`;
-                    break;
-                case 'uang_2_5':
-                    globalTotalZakatRp = jiwa * 2.5 * HARGA_BERAS_KG;
-                    teksHasil = `Total Zakat: <strong>${formatter.format(globalTotalZakatRp)}</strong> (untuk ${jiwa} jiwa)`;
-                    break;
-                case 'uang_3_0':
-                    globalTotalZakatRp = jiwa * 3.0 * HARGA_BERAS_KG;
-                    teksHasil = `Total Zakat: <strong>${formatter.format(globalTotalZakatRp)}</strong> (untuk ${jiwa} jiwa)`;
-                    break;
-                default:
-                    teksHasil = 'Pilihan tidak dikenal.';
-            }
-            
-            hasilElemen.innerHTML = teksHasil;
-            hasilElemen.style.display = 'block';
-    
-            document.getElementById('distribusiContainer').style.display = 'block';
+            // Atur ulang tampilan mustahik untuk menyegarkan hasil distribusi
             updateTampilanMustahik(); 
         }
 
@@ -680,10 +658,62 @@
             }
         }
 
+        function hitungZakatFitrah() {
+            let jiwa = parseFloat(document.getElementById('jumlahJiwa').value) || 0;
+            let jenis = document.getElementById('jenisFitrah').value;
+            let hasilElemen = document.getElementById('totalZakatFitrah');
+            
+            globalTotalBerasKg = 0;
+            globalTotalZakatRp = 0;
+            let teksHasil = "";
+
+            if (jiwa <= 0) {
+                hasilElemen.innerHTML = 'Jumlah jiwa harus diisi **minimal 1**.';
+                hasilElemen.style.display = 'block';
+                document.getElementById('distribusiContainer').style.display = 'none';
+                return;
+            }
+            
+            let berasPerJiwa = 0;
+            
+            switch (jenis) {
+                case 'beras_2_5':
+                    berasPerJiwa = 2.5;
+                    globalTotalBerasKg = jiwa * berasPerJiwa;
+                    teksHasil = `Total Zakat: <strong>${globalTotalBerasKg.toFixed(2)} kg Beras</strong> (untuk ${jiwa} jiwa)`;
+                    break;
+                case 'beras_3_0':
+                    berasPerJiwa = 3.0;
+                    globalTotalBerasKg = jiwa * berasPerJiwa;
+                    teksHasil = `Total Zakat: <strong>${globalTotalBerasKg.toFixed(2)} kg Beras</strong> (untuk ${jiwa} jiwa)`;
+                    break;
+                case 'uang_2_5':
+                    berasPerJiwa = 2.5;
+                    globalTotalZakatRp = jiwa * berasPerJiwa * HARGA_BERAS_KG;
+                    teksHasil = `Total Zakat: <strong>${formatter.format(globalTotalZakatRp)}</strong> (setara ${jiwa * berasPerJiwa} kg beras)`;
+                    break;
+                case 'uang_3_0':
+                    berasPerJiwa = 3.0;
+                    globalTotalZakatRp = jiwa * berasPerJiwa * HARGA_BERAS_KG;
+                    teksHasil = `Total Zakat: <strong>${formatter.format(globalTotalZakatRp)}</strong> (setara ${jiwa * berasPerJiwa} kg beras)`;
+                    break;
+                default:
+                    teksHasil = 'Pilihan tidak dikenal.';
+            }
+            
+            hasilElemen.innerHTML = teksHasil;
+            hasilElemen.style.display = 'block';
+    
+            document.getElementById('distribusiContainer').style.display = 'block';
+            updateTampilanMustahik(); 
+        }
+
+
         function hitungTotalZakat() {
             let totalZakat = 0;
             let rincianHTML = "";
 
+            // 1. Zakat Emas
             if (document.getElementById('checkEmas').checked) {
                 let emas = parseFloat(document.getElementById('jumlahEmas').value) || 0;
                 let haul = parseFloat(document.getElementById('lamaHaulEmas').value) || 0;
@@ -692,12 +722,13 @@
                     let zakatGram = emas * 0.025;
                     let zakatRp = zakatGram * HARGA_EMAS_GRAM;
                     totalZakat += zakatRp;
-                    rincianHTML += `<li><strong>Zakat Emas: ${formatter.format(zakatRp)}</strong> (dari ${zakatGram.toFixed(2)} gram)</li>`;
+                    rincianHTML += `<li><strong>💰 Zakat Emas: ${formatter.format(zakatRp)}</strong> (dari ${zakatGram.toFixed(2)} gram)</li>`;
                 } else {
-                    rincianHTML += `<li class="tidak-wajib">Zakat Emas: Tidak wajib (Nisab 85gram / Haul 1 tahun tidak termasuk).</li>`;
+                    rincianHTML += `<li class="tidak-wajib">💰 Zakat Emas: Tidak wajib (Nisab 85g / Haul 1 thn tidak terpenuhi).</li>`;
                 }
             }
 
+            // 2. Zakat Perak
             if (document.getElementById('checkPerak').checked) {
                 let perak = parseFloat(document.getElementById('jumlahPerak').value) || 0;
                 let haul = parseFloat(document.getElementById('lamaHaulPerak').value) || 0;
@@ -706,12 +737,13 @@
                     let zakatGram = perak * 0.025;
                     let zakatRp = zakatGram * HARGA_PERAK_GRAM;
                     totalZakat += zakatRp;
-                    rincianHTML += `<li><strong>Zakat Perak: ${formatter.format(zakatRp)}</strong> (dari ${zakatGram.toFixed(2)} gram)</li>`;
+                    rincianHTML += `<li><strong>🥈 Zakat Perak: ${formatter.format(zakatRp)}</strong> (dari ${zakatGram.toFixed(2)} gram)</li>`;
                 } else {
-                    rincianHTML += `<li class="tidak-wajib">Zakat Perak: Tidak wajib (Nisab 595gram / Haul 1thn tidak termasuk).</li>`;
+                    rincianHTML += `<li class="tidak-wajib">🥈 Zakat Perak: Tidak wajib (Nisab 595g / Haul 1 thn tidak terpenuhi).</li>`;
                 }
             }
           
+            // 3. Zakat Tabungan/Maal Lain
             if (document.getElementById('checkTabungan').checked) {
                 let tabungan = parseFloat(document.getElementById('jumlahTabungan').value) || 0;
                 let haul = parseFloat(document.getElementById('lamaHaulTabungan').value) || 0;
@@ -719,12 +751,13 @@
                 if (tabungan >= NISAB_MAAL_RUPIAH && haul >= 1) {
                     let zakatRp = tabungan * 0.025;
                     totalZakat += zakatRp;
-                    rincianHTML += `<li><strong>Zakat Tabungan: ${formatter.format(zakatRp)}</strong></li>`;
+                    rincianHTML += `<li><strong>💵 Zakat Tabungan: ${formatter.format(zakatRp)}</strong></li>`;
                 } else {
-                    rincianHTML += `<li class="tidak-wajib">Zakat Tabungan: Tidak wajib (Nisab ${formatter.format(NISAB_MAAL_RUPIAH)} / Haul 1thn tidak termasuk).</li>`;
+                    rincianHTML += `<li class="tidak-wajib">💵 Zakat Tabungan: Tidak wajib (Nisab ${formatter.format(NISAB_MAAL_RUPIAH)} / Haul 1 thn tidak terpenuhi).</li>`;
                 }
             }
-    
+          
+            // 4. Zakat Perniagaan
             if (document.getElementById('checkPerniagaan').checked) {
                 let niaga = parseFloat(document.getElementById('nilaiPerniagaan').value) || 0;
                 let haul = parseFloat(document.getElementById('lamaHaulPerniagaan').value) || 0;
@@ -732,12 +765,13 @@
                 if (niaga >= NISAB_MAAL_RUPIAH && haul >= 1) {
                     let zakatRp = niaga * 0.025;
                     totalZakat += zakatRp;
-                    rincianHTML += `<li><strong>Zakat Perniagaan: ${formatter.format(zakatRp)}</strong></li>`;
+                    rincianHTML += `<li><strong>🛍️ Zakat Perniagaan: ${formatter.format(zakatRp)}</strong></li>`;
                 } else {
-                    rincianHTML += `<li class="tidak-wajib">Zakat Perniagaan: Tidak wajib (Nisab ${formatter.format(NISAB_MAAL_RUPIAH)} / Haul 1thn tidak termasuk).</li>`;
+                    rincianHTML += `<li class="tidak-wajib">🛍️ Zakat Perniagaan: Tidak wajib (Nisab ${formatter.format(NISAB_MAAL_RUPIAH)} / Haul 1 thn tidak terpenuhi).</li>`;
                 }
             }
-         
+          
+            // 5. Zakat Pertanian
             if (document.getElementById('checkPertanian').checked) {
                 let panen = parseFloat(document.getElementById('jumlahPanen').value) || 0;
                 let irigasi = document.getElementById('jenisIrigasi').value;
@@ -747,12 +781,13 @@
                     let zakatKg = panen * kadar;
                     let zakatRp = zakatKg * HARGA_GABAH_KG;
                     totalZakat += zakatRp;
-                    rincianHTML += `<li><strong>Zakat Pertanian: ${formatter.format(zakatRp)}</strong> (dari ${zakatKg.toFixed(1)} kg gabah)</li>`;
+                    rincianHTML += `<li><strong>🌾 Zakat Pertanian: ${formatter.format(zakatRp)}</strong> (dari ${zakatKg.toFixed(2)} kg gabah)</li>`;
                 } else {
-                    rincianHTML += `<li class="tidak-wajib">Zakat Pertanian: Tidak wajib (Nisab 653 kilogram tidak termasuk).</li>`;
+                    rincianHTML += `<li class="tidak-wajib">🌾 Zakat Pertanian: Tidak wajib (Nisab 653 kg gabah tidak terpenuhi).</li>`;
                 }
             }
-           
+            
+            // 6. Zakat Penghasilan
             if (document.getElementById('checkPenghasilan').checked) {
                 let gaji = parseFloat(document.getElementById('jumlahPenghasilan').value) || 0;
                 let bonus = parseFloat(document.getElementById('penghasilanTambahan').value) || 0;
@@ -761,12 +796,13 @@
                 if (totalPenghasilan >= NISAB_PENGHASILAN_BULANAN) {
                     let zakatRp = totalPenghasilan * 0.025;
                     totalZakat += zakatRp;
-                    rincianHTML += `<li><strong>Zakat Penghasilan: ${formatter.format(zakatRp)}</strong> (dari total ${formatter.format(totalPenghasilan)})</li>`;
+                    rincianHTML += `<li><strong>👨‍💼 Zakat Penghasilan: ${formatter.format(zakatRp)}</strong> (dari total ${formatter.format(totalPenghasilan)})</li>`;
                 } else {
-                    rincianHTML += `<li class="tidak-wajib">Zakat Penghasilan: Tidak wajib (Nisab ${formatter.format(NISAB_PENGHASILAN_BULANAN)}/bln tidak termasuk).</li>`;
+                    rincianHTML += `<li class="tidak-wajib">👨‍💼 Zakat Penghasilan: Tidak wajib (Nisab ${formatter.format(NISAB_PENGHASILAN_BULANAN)}/bln tidak terpenuhi).</li>`;
                 }
             }
-           
+            
+            // 7. Zakat Peternakan/Perikanan (dianalogikan ke Zakat Maal/Perniagaan)
             if (document.getElementById('checkPeternakan').checked) {
                 let ternak = parseFloat(document.getElementById('nilaiPeternakan').value) || 0;
                 let haul = parseFloat(document.getElementById('lamaHaulPeternakan').value) || 0;
@@ -774,33 +810,36 @@
                 if (ternak >= NISAB_MAAL_RUPIAH && haul >= 1) {
                     let zakatRp = ternak * 0.025;
                     totalZakat += zakatRp;
-                    rincianHTML += `<li><strong>Zakat Peternakan: ${formatter.format(zakatRp)}</strong></li>`;
+                    rincianHTML += `<li><strong>🐑 Zakat Peternakan: ${formatter.format(zakatRp)}</strong></li>`;
                 } else {
-                    rincianHTML += `<li class="tidak-wajib">Zakat Peternakan: Tidak wajib (Nisab ${formatter.format(NISAB_MAAL_RUPIAH)} / Haul 1thn tidak termasuk).</li>`;
+                    rincianHTML += `<li class="tidak-wajib">🐑 Zakat Peternakan: Tidak wajib (Nisab ${formatter.format(NISAB_MAAL_RUPIAH)} / Haul 1 thn tidak terpenuhi).</li>`;
                 }
             }
         
+            // 8. Zakat Pertambangan
             if (document.getElementById('checkPertambangan').checked) {
                 let tambang = parseFloat(document.getElementById('nilaiPertambangan').value) || 0;
                 
+                // Nisab dan Haul dalam tambang berbeda-beda, tetapi untuk simulasi ini kita gunakan Nisab Maal
                 if (tambang >= NISAB_MAAL_RUPIAH) {
-                    let zakatRp = tambang * 0.025;
+                    let zakatRp = tambang * 0.025; // Menggunakan kadar 2.5% (analogi qiyas)
                     totalZakat += zakatRp;
-                    rincianHTML += `<li><strong>Zakat Pertambangan: ${formatter.format(zakatRp)}</strong></li>`;
+                    rincianHTML += `<li><strong>💎 Zakat Pertambangan: ${formatter.format(zakatRp)}</strong></li>`;
                 } else {
-                    rincianHTML += `<li class="tidak-wajib">Zakat Pertambangan: Tidak wajib (Nisab ${formatter.format(NISAB_MAAL_RUPIAH)} tidak termasuk).</li>`;
+                    rincianHTML += `<li class="tidak-wajib">💎 Zakat Pertambangan: Tidak wajib (Nisab ${formatter.format(NISAB_MAAL_RUPIAH)} tidak terpenuhi).</li>`;
                 }
             }
           
+            // 9. Zakat Rikaz (Harta Temuan)
             if (document.getElementById('checkRikaz').checked) {
                 let rikaz = parseFloat(document.getElementById('nilaiRikaz').value) || 0;
                 
                 if (rikaz > 0) {
                     let zakatRp = rikaz * 0.20;
                     totalZakat += zakatRp;
-                    rincianHTML += `<li><strong>Zakat Rikaz: ${formatter.format(zakatRp)}</strong> (Kadar 20%)</li>`;
+                    rincianHTML += `<li><strong>🏺 Zakat Rikaz: ${formatter.format(zakatRp)}</strong> (Kadar 20%)</li>`;
                 } else {
-                    rincianHTML += `<li class="tidak-wajib">Zakat Rikaz: Tidak ada harta temuan yang diinput.</li>`;
+                    rincianHTML += `<li class="tidak-wajib">🏺 Zakat Rikaz: Tidak ada harta temuan yang diinput.</li>`;
                 }
             }
 
@@ -815,12 +854,18 @@
             document.getElementById('rincianZakat').style.display = 'block';
 
             globalTotalZakatRp = totalZakat;
-            globalTotalBerasKg = 0;
-            document.getElementById('distribusiContainer').style.display = 'block';
+            globalTotalBerasKg = 0; // Reset beras karena ini Zakat Mal
+            
+            if (totalZakat > 0) {
+                 document.getElementById('distribusiContainer').style.display = 'block';
+            } else {
+                 document.getElementById('distribusiContainer').style.display = 'none';
+            }
+            
             updateTampilanMustahik(); 
         }
 
-
+        // --- Fungsi Distribusi dan Dalil ---
         function updateTampilanMustahik() {
             const mustahikGolongan = ["Fakir", "Miskin", "Amil", "Muallaf", "Riqab", "Gharim", "Fisabilillah", "IbnuSabil"];
             
@@ -865,26 +910,35 @@
             errorElemen.textContent = "";
             listElemen.style.display = 'none';
 
+            // 1. Cek Total Zakat
+            if (globalTotalZakatRp <= 0 && globalTotalBerasKg <= 0) {
+                 introElemen.textContent = "Silakan hitung total zakat Anda terlebih dahulu.";
+                 return;
+            }
+
+            // 2. Cek Pilihan Mustahik
             if (jumlahTerpilih === 0) {
                 introElemen.textContent = "Silakan pilih minimal satu golongan mustahik untuk dibagikan.";
                 listElemen.style.display = 'none';
                 return;
             }
             
+            // 3. Aturan Logika Kritis (Sesuai Syariah)
             if (cek.amil && jumlahTerpilih === 1) {
-                errorElemen.textContent = "Distribusi tidak sesuai syariah: membagikan hasil zakat ke Amilin saja hukumnya tidak diperbolehkan.";
+                errorElemen.textContent = "🚫 Logika Fatal (Syariah): Membagikan zakat hanya ke Amilin saja hukumnya tidak diperbolehkan. Zakat harus dibagikan kepada minimal dua golongan.";
                 errorElemen.style.display = 'block';
                 introElemen.textContent = "";
-                return; 
+                return;  
             }
             
-            if (!cek.fakir && cek.fisabilillah) {
-                errorElemen.textContent = "Distribusi tidak sesuai syariah: tidak boleh tidak memilih golongan Fakir sementara memilih Fi Sabilillah (prioritaskan fakir).";
+            if ((!cek.fakir && !cek.miskin) && (cek.amil || cek.fisabilillah)) {
+                errorElemen.textContent = "⚠️ Logika Kritis (Prioritas): Jika tidak ada Fakir/Miskin yang dipilih, tidak disarankan memilih Amil atau Fi Sabilillah karena Fakir dan Miskin adalah prioritas utama.";
                 errorElemen.style.display = 'block';
                 introElemen.textContent = "";
-                return;
             }
 
+
+            // 4. Perhitungan Distribusi (Pembagian Rata setelah porsi Amil)
             let totalDistribusiRp = globalTotalZakatRp;
             let totalDistribusiBeras = globalTotalBerasKg;
             let porsiAmilRp = 0;
@@ -894,72 +948,63 @@
             let penerimaLainCount = jumlahTerpilih;
 
             if (cek.amil) {
+                // Asumsi Amil mendapat porsi 1/8 atau 12.5% (kadar maksimal)
                 porsiAmilRp = totalDistribusiRp * 0.125;
                 porsiAmilBeras = totalDistribusiBeras * 0.125;
                 
-                totalDistribusiRp -= porsiAmilRp; 
+                totalDistribusiRp -= porsiAmilRp;  
                 totalDistribusiBeras -= porsiAmilBeras;
-                penerimaLainCount--; 
+                penerimaLainCount--; // Amil sudah dipisah
             }
             
             if (penerimaLainCount > 0) {
                 porsiSisaRp = totalDistribusiRp / penerimaLainCount;
                 porsiSisaBeras = totalDistribusiBeras / penerimaLainCount;
+            } else {
+                 // Kasus Amil dipilih sendirian sudah ditangani di Logika Fatal, 
+                 // Tapi kalau semua golongan dipilih, dan Amil sudah ambil 1/8, dan sisa golongannya 0.
+                 // Ini kasusnya mustahil kalau jumlahTerpilih > 1.
+                 porsiSisaRp = 0;
+                 porsiSisaBeras = 0;
             }
 
             let unit = "";
             let introText = "";
             if (globalTotalZakatRp > 0) {
                 unit = "Rp";
-                introText = `Total <strong>${formatter.format(globalTotalZakatRp)}</strong> didistribusikan untuk <strong>${jumlahTerpilih}</strong> golongan:`;
+                introText = `Total <strong>${formatter.format(globalTotalZakatRp)}</strong> didistribusikan secara **proporsional** untuk <strong>${jumlahTerpilih}</strong> golongan:`;
             } else if (globalTotalBerasKg > 0) {
                 unit = "Beras";
-                introText = `Total <strong>${globalTotalBerasKg.toFixed(1)} kg Beras</strong> didistribusikan untuk <strong>${jumlahTerpilih}</strong> golongan:`;
+                introText = `Total <strong>${globalTotalBerasKg.toFixed(2)} kg Beras</strong> didistribusikan secara **proporsional** untuk <strong>${jumlahTerpilih}</strong> golongan:`;
             } else {
-                introElemen.textContent = "Total zakat Anda Rp 0. Silakan hitung zakat terlebih dahulu.";
-                listElemen.style.display = 'none';
-                return;
+                return; // Seharusnya sudah teratasi di cek awal
             }
             
             introElemen.innerHTML = introText;
 
-            if (cek.amil) {
-                let teks = (unit === "Rp") ? formatter.format(porsiAmilRp) : `${porsiAmilBeras.toFixed(2)} kg`;
-                listHTML += `<li><strong>Amil:</strong> ${teks} (Porsi 1/8)</li>`;
-            }
-            if (cek.fakir) {
-                let teks = (unit === "Rp") ? formatter.format(porsiSisaRp) : `${porsiSisaBeras.toFixed(2)} kg`;
-                listHTML += `<li><strong>Fakir:</strong> ${teks}</li>`;
-            }
-            if (cek.miskin) {
-                let teks = (unit === "Rp") ? formatter.format(porsiSisaRp) : `${porsiSisaBeras.toFixed(2)} kg`;
-                listHTML += `<li><strong>Miskin:</strong> ${teks}</li>`;
-            }
-            if (cek.muallaf) {
-                let teks = (unit === "Rp") ? formatter.format(porsiSisaRp) : `${porsiSisaBeras.toFixed(2)} kg`;
-                listHTML += `<li><strong>Mu'allaf:</strong> ${teks}</li>`;
-            }
-            if (cek.riqab) {
-                let teks = (unit === "Rp") ? formatter.format(porsiSisaRp) : `${porsiSisaBeras.toFixed(2)} kg`;
-                listHTML += `<li><strong>Riqab:</strong> ${teks}</li>`;
-            }
-            if (cek.gharim) {
-                let teks = (unit === "Rp") ? formatter.format(porsiSisaRp) : `${porsiSisaBeras.toFixed(2)} kg`;
-                listHTML += `<li><strong>Gharim:</strong> ${teks}</li>`;
-            }
-            if (cek.fisabilillah) {
-                let teks = (unit === "Rp") ? formatter.format(porsiSisaRp) : `${porsiSisaBeras.toFixed(2)} kg`;
-                listHTML += `<li><strong>Fi Sabilillah:</strong> ${teks}</li>`;
-            }
-            if (cek.ibnuSabil) {
-                let teks = (unit === "Rp") ? formatter.format(porsiSisaRp) : `${porsiSisaBeras.toFixed(2)} kg`;
-                listHTML += `<li><strong>Ibnu Sabil:</strong> ${teks}</li>`;
-            }
+            // 5. Tampilkan Hasil Distribusi
+            const mustahikChecks = document.querySelectorAll('.mustahik-check');
+            mustahikChecks.forEach(checkbox => {
+                if (checkbox.checked) {
+                    let golongan = checkbox.value;
+                    let teks;
+                    
+                    if (golongan === "Amil") {
+                        teks = (unit === "Rp") ? formatter.format(porsiAmilRp) : `${porsiAmilBeras.toFixed(3)} kg`;
+                        listHTML += `<li><strong>${golongan}:</strong> ${teks} (Porsi 1/8)</li>`;
+                    } else {
+                        // Sisa mustahik (penerimaLainCount) dibagi rata dari sisa zakat
+                        teks = (unit === "Rp") ? formatter.format(porsiSisaRp) : `${porsiSisaBeras.toFixed(3)} kg`;
+                        listHTML += `<li><strong>${golongan}:</strong> ${teks}</li>`;
+                    }
+                }
+            });
             
             listElemen.innerHTML = listHTML;
             listElemen.style.display = 'block';
         }
         
+        // Inisialisasi tampilan saat halaman dimuat
         window.onload = gantiTampilanZakat;
         
     </script>
